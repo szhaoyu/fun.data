@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+   
+	<rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" exchange="spring-boot-exchange" routing-key="trust_daily_earning"/>
+
+	<!--rabbit:connection-factory id="connectionFactory" host="183.131.76.124" port=5672/-->
+	<rabbit:connection-factory id="connectionFactory" host="127.0.0.1" />
+	
+	<rabbit:admin connection-factory="connectionFactory"/>
+
+	<rabbit:queue name="trust_daily_earning" />
+
+	<!--rabbit:topic-exchange name="spring-boot-exchange">
+	    <rabbit:bindings>
+	        <rabbit:binding queue="trust_daily_earning" pattern="foo.*" />
+	    </rabbit:bindings>
+	</rabbit:topic-exchange-->	
+	
+	<rabbit:direct-exchange name="spring-boot-exchange"/>
+	<!--rabbit:listener-container connection-factory="connectionFactory">
+	    <rabbit:listener ref="consumeMessage" method="listen" queue-names="trust_daily_earning" />
+	</rabbit:listener-container-->
+	
+	<!--bean id="consumeMessage" class="com.csair.test.amqp.ConsumeMessage" /-->
+	
+</beans>
+
