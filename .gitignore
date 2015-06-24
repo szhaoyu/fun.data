@@ -1,2 +1,4 @@
 fund.crawler/target
 fund.service/target
+*.DS_Store
+
